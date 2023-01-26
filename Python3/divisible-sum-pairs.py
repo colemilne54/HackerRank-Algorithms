@@ -7,27 +7,21 @@ import re
 import sys
 
 #
-# Complete the 'getTotalX' function below.
+# Complete the 'divisibleSumPairs' function below.
 #
 # The function is expected to return an INTEGER.
 # The function accepts following parameters:
-#  1. INTEGER_ARRAY a
-#  2. INTEGER_ARRAY b
+#  1. INTEGER n
+#  2. INTEGER k
+#  3. INTEGER_ARRAY ar
 #
 
-def getTotalX(a, b):
+def divisibleSumPairs(n, k, ar):
     count = 0
-
-    for i in range (a[0], b[0]+1, a[0]):
-        valid = True
-        for numA in a:
-            if i%numA != 0:
-                valid = False
-        for numB in b:
-            if numB%i != 0:
-                valid = False
-        if valid == True:
-            count += 1
+    for i in range(n-1):
+        for j in range(1, n, 1):
+            if (i < j) and (ar[i]+ar[j])%k == 0:
+                count += 1
 
     return count
 
@@ -39,14 +33,12 @@ if __name__ == '__main__':
 
     n = int(first_multiple_input[0])
 
-    m = int(first_multiple_input[1])
+    k = int(first_multiple_input[1])
 
-    arr = list(map(int, input().rstrip().split()))
+    ar = list(map(int, input().rstrip().split()))
 
-    brr = list(map(int, input().rstrip().split()))
+    result = divisibleSumPairs(n, k, ar)
 
-    total = getTotalX(arr, brr)
-
-    fptr.write(str(total) + '\n')
+    fptr.write(str(result) + '\n')
 
     fptr.close()
